@@ -86,12 +86,16 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     ChickenX += -1
     if (true) {
     	
+    } else {
+        info.changeScoreBy(1)
     }
 })
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     ChickenY += 1
     if (true) {
     	
+    } else {
+        info.changeScoreBy(1)
     }
 })
 scene.onOverlapTile(SpriteKind.Projectile, myTiles.tile3, function (sprite, location) {
@@ -110,6 +114,8 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     ChickenX += 1
     if (true) {
     	
+    } else {
+        info.changeScoreBy(1)
     }
 })
 scene.onOverlapTile(SpriteKind.Projectile, sprites.builtin.forestTiles0, function (sprite, location) {
@@ -119,6 +125,8 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     ChickenY += -1
     if (true) {
     	
+    } else {
+        info.changeScoreBy(1)
     }
 })
 scene.onOverlapTile(SpriteKind.Projectile, myTiles.tile2, function (sprite, location) {
