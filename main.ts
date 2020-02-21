@@ -86,10 +86,10 @@ scene.onOverlapTile(SpriteKind.Projectile, myTiles.tile3, function (sprite, loca
     sprite.destroy()
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
-    Chicken.destroy(effects.spray, 100)
+    sprite.destroy(effects.spray, 100)
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Projectile, function (sprite, otherSprite) {
-    sprite.destroy()
+    sprite.destroy(effects.fire, 100)
 })
 scene.onOverlapTile(SpriteKind.Projectile, sprites.builtin.forestTiles0, function (sprite, location) {
     sprite.destroy()
@@ -101,8 +101,7 @@ scene.onOverlapTile(SpriteKind.Projectile, myTiles.tile2, function (sprite, loca
     sprite.destroy()
 })
 let Car: Sprite = null
-let Chicken: Sprite = null
-Chicken = sprites.create(img`
+let Chicken = sprites.create(img`
 . . . . . . . 2 2 . . . . . . . 
 . . . . . 1 1 2 2 1 1 . . . . . 
 . . . . . 1 1 1 1 1 1 . . . . . 
@@ -152,7 +151,7 @@ info.setScore(0)
 let CarSpawnListLeft = [9, 5]
 let CarSpawnListRight = [8, 0]
 game.onUpdateInterval(100, function () {
-    if (Math.percentChance(25)) {
+    if (Math.percentChance(50)) {
         if (Math.percentChance(50)) {
             if (Math.percentChance(33)) {
                 Car = sprites.createProjectileFromSide(img`
