@@ -146,12 +146,14 @@ tiles.setTilemap(tiles.createTilemap(
             [myTiles.tile0,myTiles.tile1,myTiles.tile2,sprites.builtin.forestTiles0,sprites.builtin.forestTiles24,sprites.castle.tileGrass1,sprites.castle.tileGrass3,sprites.castle.tileGrass2,sprites.vehicle.roadVertical,sprites.vehicle.roadHorizontal,sprites.castle.tilePath1,sprites.castle.tilePath6,sprites.castle.tilePath5,sprites.castle.tilePath2,sprites.builtin.crowd8,myTiles.tile3],
             TileScale.Sixteen
         ))
-tiles.placeOnTile(Chicken, tiles.getTileLocation(4, 13))
 scene.cameraFollowSprite(Chicken)
 info.setScore(0)
 let CarSpawnListLeft = [9, 5]
 let CarSpawnListRight = [8, 0]
+let ChickenX = 4
+let ChickenY = 13
 game.onUpdateInterval(100, function () {
+    tiles.placeOnTile(Chicken, tiles.getTileLocation(ChickenX, ChickenY))
     if (Math.percentChance(50)) {
         if (Math.percentChance(50)) {
             if (Math.percentChance(33)) {
