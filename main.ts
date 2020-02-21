@@ -82,6 +82,12 @@ namespace myTiles {
 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 
 `
 }
+controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
+    ChickenX += -1
+})
+controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
+    ChickenY += 1
+})
 scene.onOverlapTile(SpriteKind.Projectile, myTiles.tile3, function (sprite, location) {
     sprite.destroy()
 })
@@ -92,11 +98,14 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Projectile, function (sprite
     sprite.destroy(effects.fire, 100)
     otherSprite.destroy(effects.fire, 100)
 })
+controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
+    ChickenX += 1
+})
 scene.onOverlapTile(SpriteKind.Projectile, sprites.builtin.forestTiles0, function (sprite, location) {
     sprite.destroy()
 })
-scene.onOverlapTile(SpriteKind.Player, myTiles.tile2, function (sprite, location) {
-    sprite.destroy(effects.fountain, 100)
+controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
+    ChickenY += -1
 })
 scene.onOverlapTile(SpriteKind.Projectile, myTiles.tile2, function (sprite, location) {
     sprite.destroy()
