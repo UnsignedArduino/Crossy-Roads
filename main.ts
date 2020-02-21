@@ -82,21 +82,18 @@ namespace myTiles {
 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 
 `
 }
-controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
-    ChickenX += -1
+function check_for_tiles (Direction: string) {
     if (true) {
     	
-    } else {
-        info.changeScoreBy(1)
     }
+}
+controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
+    ChickenX += -1
+    check_for_tiles("LEFT")
 })
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     ChickenY += 1
-    if (true) {
-    	
-    } else {
-        info.changeScoreBy(1)
-    }
+    check_for_tiles("DOWN")
 })
 scene.onOverlapTile(SpriteKind.Projectile, myTiles.tile3, function (sprite, location) {
     sprite.destroy()
@@ -112,22 +109,14 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Projectile, function (sprite
 })
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     ChickenX += 1
-    if (true) {
-    	
-    } else {
-        info.changeScoreBy(1)
-    }
+    check_for_tiles("RIGHT")
 })
 scene.onOverlapTile(SpriteKind.Projectile, sprites.builtin.forestTiles0, function (sprite, location) {
     sprite.destroy()
 })
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     ChickenY += -1
-    if (true) {
-    	
-    } else {
-        info.changeScoreBy(1)
-    }
+    check_for_tiles("UP")
 })
 scene.onOverlapTile(SpriteKind.Projectile, myTiles.tile2, function (sprite, location) {
     sprite.destroy()
