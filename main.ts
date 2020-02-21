@@ -99,6 +99,7 @@ scene.onOverlapTile(SpriteKind.Projectile, myTiles.tile3, function (sprite, loca
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
     sprite.destroy(effects.spray, 100)
+    scene.cameraShake(4, 500)
     otherSprite.say("@$#%&!", 2000)
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Projectile, function (sprite, otherSprite) {
