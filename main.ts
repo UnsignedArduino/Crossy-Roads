@@ -88,10 +88,12 @@ namespace myTiles {
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     ChickenX += -1
     tiles.placeOnTile(Chicken, tiles.getTileLocation(ChickenX, ChickenY))
+    animation.setAction(Chicken, ActionKind.Left)
 })
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     ChickenY += 1
     tiles.placeOnTile(Chicken, tiles.getTileLocation(ChickenX, ChickenY))
+    animation.setAction(Chicken, ActionKind.Backward)
 })
 scene.onOverlapTile(SpriteKind.Projectile, myTiles.tile3, function (sprite, location) {
     sprite.destroy()
@@ -108,6 +110,7 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Projectile, function (sprite
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     ChickenX += 1
     tiles.placeOnTile(Chicken, tiles.getTileLocation(ChickenX, ChickenY))
+    animation.setAction(Chicken, ActionKind.Right)
 })
 scene.onOverlapTile(SpriteKind.Projectile, sprites.builtin.forestTiles0, function (sprite, location) {
     sprite.destroy()
@@ -115,6 +118,8 @@ scene.onOverlapTile(SpriteKind.Projectile, sprites.builtin.forestTiles0, functio
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     ChickenY += -1
     tiles.placeOnTile(Chicken, tiles.getTileLocation(ChickenX, ChickenY))
+    animation.setAction(Chicken, ActionKind.Foward)
+    info.changeScoreBy(1)
 })
 scene.onOverlapTile(SpriteKind.Projectile, myTiles.tile2, function (sprite, location) {
     sprite.destroy()
@@ -253,6 +258,7 @@ ChickenRightAnim.addAnimationFrame(img`
 . . . . . . . . . . . . . . . . 
 `)
 animation.attachAnimation(Chicken, ChickenRightAnim)
+animation.setAction(Chicken, ActionKind.Foward)
 tiles.placeOnTile(Chicken, tiles.getTileLocation(ChickenX, ChickenY))
 game.onUpdateInterval(100, function () {
     if (Math.percentChance(50)) {
