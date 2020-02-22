@@ -82,17 +82,6 @@ namespace myTiles {
 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 
 `
 }
-function move_in_opposite_direction (direction: string) {
-    if ("" == "") {
-    	
-    } else if ("" == "") {
-    	
-    } else if ("" == "") {
-    	
-    } else if ("" == "") {
-    	
-    }
-}
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     ChickenX += -1
     check_for_tiles("LEFT")
@@ -117,13 +106,24 @@ function check_for_tiles (Direction: string) {
     if (Chicken.tileKindAt(TileDirection.Center, myTiles.tile2)) {
         Chicken.destroy(effects.fountain, 100)
     } else if (Chicken.tileKindAt(TileDirection.Center, sprites.builtin.forestTiles0)) {
-    	
+        move_in_opposite_direction(Direction)
     }
 }
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     ChickenX += 1
     check_for_tiles("RIGHT")
 })
+function move_in_opposite_direction (direction: string) {
+    if (direction == "UP") {
+        ChickenY += 2
+    } else if (direction == "DOWN") {
+        ChickenY += -2
+    } else if (direction == "LEFT") {
+        ChickenX += 2
+    } else if (direction == "RIGHT") {
+        ChickenX += -2
+    }
+}
 scene.onOverlapTile(SpriteKind.Projectile, sprites.builtin.forestTiles0, function (sprite, location) {
     sprite.destroy()
 })
