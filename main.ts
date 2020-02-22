@@ -163,6 +163,26 @@ let CarSpawnListLeft = [9, 5]
 let CarSpawnListRight = [8, 0]
 let ChickenX = 4
 let ChickenY = 13
+let ChickenFowardAnim = animation.createAnimation(ActionKind.Foward, 100)
+ChickenFowardAnim.addAnimationFrame(img`
+. . . . . . . 2 2 . . . . . . . 
+. . . . . 1 1 2 2 1 1 . . . . . 
+. . . . . 1 1 1 1 1 1 . . . . . 
+. . . . . 1 1 1 1 1 1 . . . . . 
+. . . . . 1 1 1 1 1 1 . . . . . 
+. . . . . 1 1 1 1 1 1 . . . . . 
+. . . . d 1 1 1 1 1 1 d . . . . 
+. . . . d 1 d d d d 1 d . . . . 
+. . . . d 1 d d d d 1 d . . . . 
+. . . . d 1 d d d d 1 d . . . . 
+. . . . . 1 d d d d 1 . . . . . 
+. . . . . 1 1 1 1 1 1 . . . . . 
+. . . . . . 4 . . 4 . . . . . . 
+. . . . . . 4 . . 4 . . . . . . 
+. . . . . . 4 . . 4 . . . . . . 
+. . . . . 4 4 4 4 4 4 . . . . . 
+`)
+animation.attachAnimation(Chicken, ChickenFowardAnim)
 game.onUpdateInterval(100, function () {
     tiles.placeOnTile(Chicken, tiles.getTileLocation(ChickenX, ChickenY))
     if (Math.percentChance(50)) {
