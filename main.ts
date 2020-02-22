@@ -311,4 +311,5 @@ game.onUpdateInterval(100, function () {
             tiles.placeOnTile(Car, tiles.getTileLocation(10, CarSpawnListRight[Math.randomRange(0, CarSpawnListLeft.length)]))
         }
     }
+    Chicken.say("" + ChickenX + ", " + ChickenY)
 })
