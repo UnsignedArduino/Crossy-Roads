@@ -82,8 +82,14 @@ namespace myTiles {
 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 
 `
 }
-function check_for_tiles (Direction: string) {
-    if (true) {
+function move_in_opposite_direction (direction: string) {
+    if ("" == "") {
+    	
+    } else if ("" == "") {
+    	
+    } else if ("" == "") {
+    	
+    } else if ("" == "") {
     	
     }
 }
@@ -107,6 +113,13 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Projectile, function (sprite
     sprite.destroy(effects.fire, 100)
     otherSprite.destroy(effects.fire, 100)
 })
+function check_for_tiles (Direction: string) {
+    if (Chicken.tileKindAt(TileDirection.Center, myTiles.tile2)) {
+        Chicken.destroy(effects.fountain, 100)
+    } else if (Chicken.tileKindAt(TileDirection.Center, sprites.builtin.forestTiles0)) {
+    	
+    }
+}
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     ChickenX += 1
     check_for_tiles("RIGHT")
@@ -122,7 +135,8 @@ scene.onOverlapTile(SpriteKind.Projectile, myTiles.tile2, function (sprite, loca
     sprite.destroy()
 })
 let Car: Sprite = null
-let Chicken = sprites.create(img`
+let Chicken: Sprite = null
+Chicken = sprites.create(img`
 . . . . . . . 2 2 . . . . . . . 
 . . . . . 1 1 2 2 1 1 . . . . . 
 . . . . . 1 1 1 1 1 1 . . . . . 
