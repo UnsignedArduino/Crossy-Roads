@@ -85,9 +85,11 @@ namespace myTiles {
 }
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     ChickenX += -1
+    tiles.placeOnTile(Chicken, tiles.getTileLocation(ChickenX, ChickenY))
 })
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     ChickenY += 1
+    tiles.placeOnTile(Chicken, tiles.getTileLocation(ChickenX, ChickenY))
 })
 scene.onOverlapTile(SpriteKind.Projectile, myTiles.tile3, function (sprite, location) {
     sprite.destroy()
@@ -103,18 +105,23 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Projectile, function (sprite
 })
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     ChickenX += 1
+    tiles.placeOnTile(Chicken, tiles.getTileLocation(ChickenX, ChickenY))
 })
 scene.onOverlapTile(SpriteKind.Projectile, sprites.builtin.forestTiles0, function (sprite, location) {
     sprite.destroy()
 })
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     ChickenY += -1
+    tiles.placeOnTile(Chicken, tiles.getTileLocation(ChickenX, ChickenY))
 })
 scene.onOverlapTile(SpriteKind.Projectile, myTiles.tile2, function (sprite, location) {
     sprite.destroy()
 })
 let Car: Sprite = null
-let Chicken = sprites.create(img`
+let ChickenY = 0
+let ChickenX = 0
+let Chicken: Sprite = null
+Chicken = sprites.create(img`
 . . . . . . . 2 2 . . . . . . . 
 . . . . . 1 1 2 2 1 1 . . . . . 
 . . . . . 1 1 1 1 1 1 . . . . . 
@@ -162,8 +169,8 @@ scene.cameraFollowSprite(Chicken)
 info.setScore(0)
 let CarSpawnListLeft = [9, 5]
 let CarSpawnListRight = [8, 0]
-let ChickenX = 4
-let ChickenY = 13
+ChickenX = 4
+ChickenY = 13
 let ChickenFowardAnim = animation.createAnimation(ActionKind.Foward, 100)
 ChickenFowardAnim.addAnimationFrame(img`
 . . . . . . . 2 2 . . . . . . . 
@@ -204,8 +211,8 @@ ChickenBackwardAnim.addAnimationFrame(img`
 . . . . . . . . . . . . . . . . 
 `)
 animation.attachAnimation(Chicken, ChickenBackwardAnim)
+tiles.placeOnTile(Chicken, tiles.getTileLocation(ChickenX, ChickenY))
 game.onUpdateInterval(100, function () {
-    tiles.placeOnTile(Chicken, tiles.getTileLocation(ChickenX, ChickenY))
     if (Math.percentChance(50)) {
         if (Math.percentChance(50)) {
             if (Math.percentChance(33)) {
