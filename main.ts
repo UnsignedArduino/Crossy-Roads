@@ -84,11 +84,9 @@ namespace myTiles {
 }
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     ChickenX += -1
-    check_for_tiles("LEFT")
 })
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     ChickenY += 1
-    check_for_tiles("DOWN")
 })
 scene.onOverlapTile(SpriteKind.Projectile, myTiles.tile3, function (sprite, location) {
     sprite.destroy()
@@ -102,44 +100,20 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Projectile, function (sprite
     sprite.destroy(effects.fire, 100)
     otherSprite.destroy(effects.fire, 100)
 })
-function check_for_tiles (Direction: string) {
-    if (Chicken.tileKindAt(TileDirection.Center, myTiles.tile2)) {
-        Chicken.destroy(effects.fountain, 100)
-    } else if (Chicken.tileKindAt(TileDirection.Center, sprites.builtin.forestTiles0)) {
-        move_in_opposite_direction(Direction)
-    }
-}
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     ChickenX += 1
-    check_for_tiles("RIGHT")
 })
-function move_in_opposite_direction (direction: string) {
-    if (direction == "UP") {
-        ChickenY += 2
-    } else if (direction == "DOWN") {
-        ChickenY += -2
-    } else if (direction == "LEFT") {
-        ChickenX += 2
-    } else if (direction == "RIGHT") {
-        ChickenX += -2
-    }
-    tiles.placeOnTile(Chicken, tiles.getTileLocation(ChickenX, ChickenY))
-}
 scene.onOverlapTile(SpriteKind.Projectile, sprites.builtin.forestTiles0, function (sprite, location) {
     sprite.destroy()
 })
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     ChickenY += -1
-    check_for_tiles("UP")
 })
 scene.onOverlapTile(SpriteKind.Projectile, myTiles.tile2, function (sprite, location) {
     sprite.destroy()
 })
 let Car: Sprite = null
-let ChickenY = 0
-let ChickenX = 0
-let Chicken: Sprite = null
-Chicken = sprites.create(img`
+let Chicken = sprites.create(img`
 . . . . . . . 2 2 . . . . . . . 
 . . . . . 1 1 2 2 1 1 . . . . . 
 . . . . . 1 1 1 1 1 1 . . . . . 
@@ -187,8 +161,8 @@ scene.cameraFollowSprite(Chicken)
 info.setScore(0)
 let CarSpawnListLeft = [9, 5]
 let CarSpawnListRight = [8, 0]
-ChickenX = 4
-ChickenY = 13
+let ChickenX = 4
+let ChickenY = 13
 game.onUpdateInterval(100, function () {
     tiles.placeOnTile(Chicken, tiles.getTileLocation(ChickenX, ChickenY))
     if (Math.percentChance(50)) {
