@@ -123,6 +123,7 @@ function move_in_opposite_direction (direction: string) {
     } else if (direction == "RIGHT") {
         ChickenX += -2
     }
+    tiles.placeOnTile(Chicken, tiles.getTileLocation(ChickenX, ChickenY))
 }
 scene.onOverlapTile(SpriteKind.Projectile, sprites.builtin.forestTiles0, function (sprite, location) {
     sprite.destroy()
@@ -135,6 +136,8 @@ scene.onOverlapTile(SpriteKind.Projectile, myTiles.tile2, function (sprite, loca
     sprite.destroy()
 })
 let Car: Sprite = null
+let ChickenY = 0
+let ChickenX = 0
 let Chicken: Sprite = null
 Chicken = sprites.create(img`
 . . . . . . . 2 2 . . . . . . . 
@@ -184,8 +187,8 @@ scene.cameraFollowSprite(Chicken)
 info.setScore(0)
 let CarSpawnListLeft = [9, 5]
 let CarSpawnListRight = [8, 0]
-let ChickenX = 4
-let ChickenY = 13
+ChickenX = 4
+ChickenY = 13
 game.onUpdateInterval(100, function () {
     tiles.placeOnTile(Chicken, tiles.getTileLocation(ChickenX, ChickenY))
     if (Math.percentChance(50)) {
