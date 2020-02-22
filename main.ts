@@ -211,6 +211,26 @@ ChickenBackwardAnim.addAnimationFrame(img`
 . . . . . . . . . . . . . . . . 
 `)
 animation.attachAnimation(Chicken, ChickenBackwardAnim)
+let ChickenLeftAnim = animation.createAnimation(ActionKind.Backward, 100)
+ChickenLeftAnim.addAnimationFrame(img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`)
+animation.attachAnimation(Chicken, ChickenLeftAnim)
 tiles.placeOnTile(Chicken, tiles.getTileLocation(ChickenX, ChickenY))
 game.onUpdateInterval(100, function () {
     if (Math.percentChance(50)) {
