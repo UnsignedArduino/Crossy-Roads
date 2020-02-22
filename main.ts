@@ -3,7 +3,9 @@ enum ActionKind {
     Idle,
     Jumping,
     Foward,
-    Backward
+    Backward,
+    Left,
+    Right
 }
 namespace myTiles {
     //% blockIdentity=images._tile
@@ -211,7 +213,7 @@ ChickenBackwardAnim.addAnimationFrame(img`
 . . . . . . . . . . . . . . . . 
 `)
 animation.attachAnimation(Chicken, ChickenBackwardAnim)
-let ChickenLeftAnim = animation.createAnimation(ActionKind.Backward, 100)
+let ChickenLeftAnim = animation.createAnimation(ActionKind.Left, 100)
 ChickenLeftAnim.addAnimationFrame(img`
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
@@ -231,6 +233,26 @@ ChickenLeftAnim.addAnimationFrame(img`
 . . . . . . . . . . . . . . . . 
 `)
 animation.attachAnimation(Chicken, ChickenLeftAnim)
+let ChickenRightAnim = animation.createAnimation(ActionKind.Right, 100)
+ChickenRightAnim.addAnimationFrame(img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`)
+animation.attachAnimation(Chicken, ChickenRightAnim)
 tiles.placeOnTile(Chicken, tiles.getTileLocation(ChickenX, ChickenY))
 game.onUpdateInterval(100, function () {
     if (Math.percentChance(50)) {
