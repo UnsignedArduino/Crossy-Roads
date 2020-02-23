@@ -200,22 +200,22 @@ ChickenFowardAnim.addAnimationFrame(img`
 animation.attachAnimation(Chicken, ChickenFowardAnim)
 let ChickenBackwardAnim = animation.createAnimation(ActionKind.Backward, 100)
 ChickenBackwardAnim.addAnimationFrame(img`
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
+. . . . . . . 2 2 . . . . . . . 
+. . . . . 1 1 2 2 1 1 . . . . . 
+. . . . . 1 1 1 1 1 1 . . . . . 
+. . . . . 1 f 1 1 f 1 . . . . . 
+. . . . . 1 1 1 1 1 1 . . . . . 
+. . . . . 1 1 4 4 1 1 . . . . . 
+. . . . d 1 1 4 4 1 1 d . . . . 
+. . . . d 1 1 1 1 1 1 d . . . . 
+. . . . d 1 1 1 1 1 1 d . . . . 
+. . . . d 1 1 1 1 1 1 d . . . . 
+. . . . . 1 1 1 1 1 1 . . . . . 
+. . . . . 1 1 1 1 1 1 . . . . . 
+. . . . . . 4 . . 4 . . . . . . 
+. . . . . . 4 . . 4 . . . . . . 
+. . . . . . 4 . . 4 . . . . . . 
+. . . . . 4 4 4 4 4 4 . . . . . 
 `)
 animation.attachAnimation(Chicken, ChickenBackwardAnim)
 let ChickenLeftAnim = animation.createAnimation(ActionKind.Left, 100)
