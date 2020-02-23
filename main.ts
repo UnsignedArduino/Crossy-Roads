@@ -221,42 +221,44 @@ animation.attachAnimation(Chicken, ChickenBackwardAnim)
 let ChickenLeftAnim = animation.createAnimation(ActionKind.Left, 100)
 ChickenLeftAnim.addAnimationFrame(img`
 . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
+. . . . 2 2 . . . . . . . . . . 
+. . . 1 1 1 1 1 . . . . . . . . 
+. . . 1 1 1 1 1 . . . . . . . . 
+. . 4 1 1 1 1 1 . . . . . . . . 
+. . 4 1 1 1 1 1 . . . . . . . . 
+. . . 1 1 1 1 1 1 1 1 1 1 . . . 
+. . . 1 1 d d d d d d d 1 d . . 
+. . . 1 1 d d d d d d d 1 d . . 
+. . . 1 1 d d d d d d d 1 d . . 
+. . . 1 1 1 d d d d d d 1 d . . 
+. . . 1 1 1 1 1 1 1 1 1 1 . . . 
+. . . . . . . . . 4 . . . . . . 
+. . . . . . . . . 4 . . . . . . 
+. . . . . . . . . 4 . . . . . . 
+. . . . . . . . 4 4 4 . . . . . 
 `)
 animation.attachAnimation(Chicken, ChickenLeftAnim)
 let ChickenRightAnim = animation.createAnimation(ActionKind.Right, 100)
-ChickenRightAnim.addAnimationFrame(img`
+let LeftFlipped = img`
 . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-`)
+. . . . 2 2 . . . . . . . . . . 
+. . . 1 1 1 1 1 . . . . . . . . 
+. . . 1 1 1 1 1 . . . . . . . . 
+. . 4 1 1 1 1 1 . . . . . . . . 
+. . 4 1 1 1 1 1 . . . . . . . . 
+. . . 1 1 1 1 1 1 1 1 1 1 . . . 
+. . . 1 1 d d d d d d d 1 d . . 
+. . . 1 1 d d d d d d d 1 d . . 
+. . . 1 1 d d d d d d d 1 d . . 
+. . . 1 1 1 d d d d d d 1 d . . 
+. . . 1 1 1 1 1 1 1 1 1 1 . . . 
+. . . . . . . . . 4 . . . . . . 
+. . . . . . . . . 4 . . . . . . 
+. . . . . . . . . 4 . . . . . . 
+. . . . . . . . 4 4 4 . . . . . 
+`
+LeftFlipped.flipX()
+ChickenRightAnim.addAnimationFrame(LeftFlipped)
 animation.attachAnimation(Chicken, ChickenRightAnim)
 animation.setAction(Chicken, ActionKind.Foward)
 tiles.placeOnTile(Chicken, tiles.getTileLocation(ChickenX, ChickenY))
