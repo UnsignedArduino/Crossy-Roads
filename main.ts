@@ -173,7 +173,7 @@ tiles.setTilemap(tiles.createTilemap(
             TileScale.Sixteen
         ))
 scene.cameraFollowSprite(Chicken)
-info.setScore(0)
+info.setScore(600)
 let CarSpawnListLeft = [9, 5]
 let CarSpawnListRight = [8, 0]
 ChickenX = 4
@@ -262,6 +262,7 @@ ChickenRightAnim.addAnimationFrame(LeftFlipped)
 animation.attachAnimation(Chicken, ChickenRightAnim)
 animation.setAction(Chicken, ActionKind.Foward)
 tiles.placeOnTile(Chicken, tiles.getTileLocation(ChickenX, ChickenY))
+info.startCountdown(60)
 game.onUpdateInterval(100, function () {
     if (Math.percentChance(50)) {
         if (Math.percentChance(50)) {
@@ -387,4 +388,11 @@ game.onUpdateInterval(100, function () {
         }
     }
     Chicken.say("" + ChickenX + ", " + ChickenY)
+})
+forever(function () {
+    pause(100)
+    info.changeScoreBy(-1)
+    if (true) {
+        game.over(true, effects.confetti)
+    }
 })
