@@ -102,6 +102,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, ot
     sprite.destroy(effects.spray, 100)
     scene.cameraShake(4, 500)
     otherSprite.say("@$#%&!", 2000)
+    Dead = 1
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Projectile, function (sprite, otherSprite) {
     sprite.destroy(effects.fire, 100)
@@ -127,6 +128,7 @@ scene.onOverlapTile(SpriteKind.Projectile, myTiles.tile2, function (sprite, loca
 let Car: Sprite = null
 let ChickenY = 0
 let ChickenX = 0
+let Dead = 0
 let Chicken: Sprite = null
 Chicken = sprites.create(img`
 . . . . . . . 2 2 . . . . . . . 
@@ -173,7 +175,9 @@ tiles.setTilemap(tiles.createTilemap(
             TileScale.Sixteen
         ))
 scene.cameraFollowSprite(Chicken)
-info.setScore(600)
+info.setScore(0)
+Dead = 0
+let DeadTimeout = 20
 let CarSpawnListLeft = [9, 5]
 let CarSpawnListRight = [8, 0]
 ChickenX = 4
@@ -262,7 +266,6 @@ ChickenRightAnim.addAnimationFrame(LeftFlipped)
 animation.attachAnimation(Chicken, ChickenRightAnim)
 animation.setAction(Chicken, ActionKind.Foward)
 tiles.placeOnTile(Chicken, tiles.getTileLocation(ChickenX, ChickenY))
-info.startCountdown(60)
 game.onUpdateInterval(100, function () {
     if (Math.percentChance(50)) {
         if (Math.percentChance(50)) {
@@ -387,12 +390,12 @@ game.onUpdateInterval(100, function () {
             tiles.placeOnTile(Car, tiles.getTileLocation(10, CarSpawnListRight[Math.randomRange(0, CarSpawnListLeft.length)]))
         }
     }
-    Chicken.say("" + ChickenX + ", " + ChickenY)
-})
-forever(function () {
-    pause(100)
-    info.changeScoreBy(-1)
-    if (ChickenY == 0) {
-        game.over(true, effects.confetti)
+    if (Dead != 0) {
+        if (DeadTimeout > 0) {
+            DeadTimeout += -1
+        } else {
+            game.over(false, effects.melt)
+        }
     }
+    console.log(DeadTimeout)
 })
