@@ -85,18 +85,26 @@ namespace myTiles {
 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 
 `
 }
+scene.onOverlapTile(SpriteKind.Projectile, sprites.castle.tileGrass1, function (sprite, location) {
+    sprite.destroy()
+})
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     ChickenX += -1
     tiles.placeOnTile(Chicken, tiles.getTileLocation(ChickenX, ChickenY))
     animation.setAction(Chicken, ActionKind.Left)
+    Timeout = 50
 })
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     ChickenY += 1
     tiles.placeOnTile(Chicken, tiles.getTileLocation(ChickenX, ChickenY))
     animation.setAction(Chicken, ActionKind.Backward)
     info.changeScoreBy(-1)
+    Timeout = 50
 })
 scene.onOverlapTile(SpriteKind.Projectile, myTiles.tile3, function (sprite, location) {
+    sprite.destroy()
+})
+scene.onOverlapTile(SpriteKind.Projectile, sprites.castle.tileGrass3, function (sprite, location) {
     sprite.destroy()
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
@@ -113,6 +121,10 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     ChickenX += 1
     tiles.placeOnTile(Chicken, tiles.getTileLocation(ChickenX, ChickenY))
     animation.setAction(Chicken, ActionKind.Right)
+    Timeout = 50
+})
+scene.onOverlapTile(SpriteKind.Projectile, myTiles.tile1, function (sprite, location) {
+    sprite.destroy()
 })
 scene.onOverlapTile(SpriteKind.Projectile, sprites.builtin.forestTiles0, function (sprite, location) {
     sprite.destroy()
@@ -122,13 +134,18 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     tiles.placeOnTile(Chicken, tiles.getTileLocation(ChickenX, ChickenY))
     animation.setAction(Chicken, ActionKind.Foward)
     info.changeScoreBy(1)
+    Timeout = 50
 })
 scene.onOverlapTile(SpriteKind.Projectile, myTiles.tile2, function (sprite, location) {
+    sprite.destroy()
+})
+scene.onOverlapTile(SpriteKind.Projectile, sprites.castle.tileGrass2, function (sprite, location) {
     sprite.destroy()
 })
 let Car: Sprite = null
 let ChickenY = 0
 let ChickenX = 0
+let Timeout = 0
 let Dead = 0
 let Chicken: Sprite = null
 Chicken = sprites.create(img`
@@ -179,6 +196,7 @@ scene.cameraFollowSprite(Chicken)
 info.setScore(0)
 Dead = 0
 let DeadTimeout = 20
+Timeout = 50
 let CarSpawnListLeft = [9, 5]
 let CarSpawnListRight = [8, 0]
 ChickenX = 4
@@ -398,5 +416,10 @@ game.onUpdateInterval(100, function () {
             game.over(false, effects.melt)
         }
     }
-    console.log(DeadTimeout)
+    if (Timeout <= 0) {
+        Dead = 1
+    } else {
+        Timeout += -1
+    }
+    console.log("" + Timeout + ", " + DeadTimeout)
 })
