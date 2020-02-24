@@ -392,7 +392,7 @@ game.onUpdateInterval(100, function () {
 forever(function () {
     pause(100)
     info.changeScoreBy(-1)
-    if (true) {
+    if (ChickenY == 0) {
         game.over(true, effects.confetti)
     }
 })
