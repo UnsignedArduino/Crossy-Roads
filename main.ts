@@ -314,7 +314,7 @@ game.onUpdateInterval(100, function () {
 . . . f f f . . . . f f f f . . 
 . . . . . . . . . . . . . . . . 
 `, 50, 0)
-            } else if (Math.percentChance(33)) {
+            } else if (Math.percentChance(50)) {
                 Car = sprites.createProjectileFromSide(img`
 . . . . . . . . . . . . . . . . 
 . . . . 6 6 6 6 6 6 6 6 . . . . 
@@ -374,7 +374,7 @@ game.onUpdateInterval(100, function () {
 . . . . f f f f . . . . f f f . 
 . . . . . . . . . . . . . . . . 
 `, -50, 0)
-            } else if (Math.percentChance(33)) {
+            } else if (Math.percentChance(50)) {
                 Car = sprites.createProjectileFromSide(img`
 . . . . . . . . . . . . . . . . 
 . . . . . . 6 6 6 6 6 6 6 6 . . 
