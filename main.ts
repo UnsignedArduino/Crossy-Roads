@@ -438,6 +438,7 @@ e e e e e e e e e e e e e e e e e .
 . . . . . . 1 1 4 1 1 . . . . . . . 
 . . . . . . . . 4 . . . . . . . . . 
 `, SpriteKind.Enemy)
+        tiles.placeOnTile(Eagle, tiles.getTileLocation(ChickenX, 0))
         Dead = 1
     } else {
         Timeout += -1
