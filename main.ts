@@ -94,6 +94,7 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     ChickenY += 1
     tiles.placeOnTile(Chicken, tiles.getTileLocation(ChickenX, ChickenY))
     animation.setAction(Chicken, ActionKind.Backward)
+    info.changeScoreBy(-1)
 })
 scene.onOverlapTile(SpriteKind.Projectile, myTiles.tile3, function (sprite, location) {
     sprite.destroy()
