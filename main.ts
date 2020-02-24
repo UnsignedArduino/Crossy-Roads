@@ -142,6 +142,7 @@ scene.onOverlapTile(SpriteKind.Projectile, myTiles.tile2, function (sprite, loca
 scene.onOverlapTile(SpriteKind.Projectile, sprites.castle.tileGrass2, function (sprite, location) {
     sprite.destroy()
 })
+let Eagle: Sprite = null
 let Car: Sprite = null
 let ChickenY = 0
 let ChickenX = 0
@@ -417,6 +418,26 @@ game.onUpdateInterval(100, function () {
         }
     }
     if (Timeout <= 0) {
+        Eagle = sprites.create(img`
+. . . . . . d d d d d . . . . . . . 
+. . . . . . 1 1 1 1 1 . . . . . . . 
+. . . . . . 1 1 1 1 1 . . . . . . . 
+. . . . . . e e e e e . . . . . . . 
+. . . . . . e e e e e . . . . . . . 
+. . . . . . e e e e e . . . . . . . 
+. . . . . . e e e e e . . . . . . . 
+e e e e e e e e e e e e e e e e e . 
+e e e e e e e e e e e e e e e e e . 
+e e e e e e e e e e e e e e e e e . 
+. . . . . . e e e e e . . . . . . . 
+. . . . . . e e e e e . . . . . . . 
+. . . . . . e e e e e . . . . . . . 
+. . . . . . 1 1 1 1 1 . . . . . . . 
+. . . . . . 1 f 1 f 1 . . . . . . . 
+. . . . . . 1 1 1 1 1 . . . . . . . 
+. . . . . . 1 1 4 1 1 . . . . . . . 
+. . . . . . . . 4 . . . . . . . . . 
+`, SpriteKind.Enemy)
         Dead = 1
     } else {
         Timeout += -1
