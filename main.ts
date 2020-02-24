@@ -101,6 +101,12 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     info.changeScoreBy(-1)
     Timeout = 50
 })
+sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSprite) {
+    otherSprite.follow(sprite, 2000)
+    sprite.setFlag(SpriteFlag.DestroyOnWall, true)
+    otherSprite.setFlag(SpriteFlag.DestroyOnWall, true)
+    otherSprite.setFlag(SpriteFlag.Invisible, true)
+})
 scene.onOverlapTile(SpriteKind.Projectile, myTiles.tile3, function (sprite, location) {
     sprite.destroy()
 })
@@ -174,21 +180,21 @@ tiles.setTilemap(tiles.createTilemap(
             hex`0a0010000909090909090909090903010103010501070503020f020f020f02020f020f0f0202020f0f02020f020f0f0202020f020f0f0909090909090909090903010301010101010603030101010701010103030909090909090909090909090909090909090909030301010103010103030303070105010101030303030105010101030303030301010101010103030303010701010101030303030303030303030303`,
             img`
 . . . . . . . . . . 
-2 . . 2 . . . . . 2 
 . . . . . . . . . . 
 . . . . . . . . . . 
 . . . . . . . . . . 
 . . . . . . . . . . 
-2 . 2 . . . . . . 2 
-2 . . . . . . . 2 2 
 . . . . . . . . . . 
 . . . . . . . . . . 
-2 2 . . . 2 . . 2 2 
-2 2 . . . . . . 2 2 
-2 2 . . . . . 2 2 2 
-2 2 . . . . . . 2 2 
-2 2 . . . . . . 2 2 
-2 2 2 2 2 2 2 2 2 2 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
 `,
             [myTiles.tile0,myTiles.tile1,myTiles.tile2,sprites.builtin.forestTiles0,sprites.builtin.forestTiles24,sprites.castle.tileGrass1,sprites.castle.tileGrass3,sprites.castle.tileGrass2,sprites.vehicle.roadVertical,sprites.vehicle.roadHorizontal,sprites.castle.tilePath1,sprites.castle.tilePath6,sprites.castle.tilePath5,sprites.castle.tilePath2,sprites.builtin.crowd8,myTiles.tile3],
             TileScale.Sixteen
@@ -438,8 +444,10 @@ e e e e e e e e e e e e e e e e e .
 . . . . . . 1 1 4 1 1 . . . . . . . 
 . . . . . . . . 4 . . . . . . . . . 
 `, SpriteKind.Enemy)
-        tiles.placeOnTile(Eagle, tiles.getTileLocation(ChickenX, 0))
+        tiles.placeOnTile(Eagle, tiles.getTileLocation(ChickenX, ChickenY - 5))
+        Eagle.setVelocity(0, 200)
         Dead = 1
+        Timeout = 30
     } else {
         Timeout += -1
     }
