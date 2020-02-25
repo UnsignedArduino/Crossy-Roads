@@ -85,19 +85,29 @@ namespace myTiles {
 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 
 `
 }
+function move (Direction: string, SpriteToMove: Sprite) {
+    if (Direction == "U") {
+        ChickenY += -1
+    } else if (Direction == "D") {
+        ChickenY += 1
+    } else if (Direction == "L") {
+        ChickenX += -1
+    } else if (Direction == "R") {
+        ChickenX += 1
+    }
+    tiles.placeOnTile(SpriteToMove, tiles.getTileLocation(ChickenX, ChickenY))
+}
 scene.onOverlapTile(SpriteKind.Projectile, sprites.castle.tileGrass1, function (sprite, location) {
     sprite.destroy()
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
-    ChickenX += -1
-    tiles.placeOnTile(Chicken, tiles.getTileLocation(ChickenX, ChickenY))
+    move("L", Chicken)
     check_for_tiles("R", Chicken)
     animation.setAction(Chicken, ActionKind.Left)
     Timeout = 50
 })
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
-    ChickenY += 1
-    tiles.placeOnTile(Chicken, tiles.getTileLocation(ChickenX, ChickenY))
+    move("D", Chicken)
     check_for_tiles("U", Chicken)
     animation.setAction(Chicken, ActionKind.Backward)
     info.changeScoreBy(-1)
@@ -126,13 +136,15 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Projectile, function (sprite
     otherSprite.destroy(effects.fire, 100)
 })
 function check_for_tiles (DirectionIfError: string, SpriteToCheck: Sprite) {
-    if (true) {
-    	
+    if (SpriteToCheck.tileKindAt(TileDirection.Center, myTiles.tile2)) {
+        SpriteToCheck.destroy(effects.fountain, 100)
+        Dead = 1
+    } else if (SpriteToCheck.tileKindAt(TileDirection.Center, sprites.builtin.forestTiles0)) {
+        move(DirectionIfError, SpriteToCheck)
     }
 }
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
-    ChickenX += 1
-    tiles.placeOnTile(Chicken, tiles.getTileLocation(ChickenX, ChickenY))
+    move("R", Chicken)
     check_for_tiles("L", Chicken)
     animation.setAction(Chicken, ActionKind.Right)
     Timeout = 50
@@ -144,8 +156,7 @@ scene.onOverlapTile(SpriteKind.Projectile, sprites.builtin.forestTiles0, functio
     sprite.destroy()
 })
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
-    ChickenY += -1
-    tiles.placeOnTile(Chicken, tiles.getTileLocation(ChickenX, ChickenY))
+    move("U", Chicken)
     check_for_tiles("D", Chicken)
     animation.setAction(Chicken, ActionKind.Foward)
     info.changeScoreBy(1)
