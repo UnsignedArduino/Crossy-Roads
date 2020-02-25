@@ -104,7 +104,9 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     Timeout = 50
 })
 function check_for_tile (DirectionIfError: string) {
-	
+    if (true) {
+    	
+    }
 }
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSprite) {
     otherSprite.follow(sprite, 2000)
