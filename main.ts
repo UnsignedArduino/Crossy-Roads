@@ -85,18 +85,6 @@ namespace myTiles {
 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 
 `
 }
-function move (Direction: string, SpriteToMove: Sprite) {
-    if (Direction == "U") {
-        ChickenY += -1
-    } else if (Direction == "D") {
-        ChickenY += 1
-    } else if (Direction == "L") {
-        ChickenX += -1
-    } else if (Direction == "R") {
-        ChickenX += 1
-    }
-    tiles.placeOnTile(SpriteToMove, tiles.getTileLocation(ChickenX, ChickenY))
-}
 scene.onOverlapTile(SpriteKind.Projectile, sprites.castle.tileGrass1, function (sprite, location) {
     sprite.destroy()
 })
@@ -162,6 +150,18 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     info.changeScoreBy(1)
     Timeout = 50
 })
+function move (Direction: string, SpriteToMove: Sprite) {
+    if (Direction == "U") {
+        ChickenY += -1
+    } else if (Direction == "D") {
+        ChickenY += 1
+    } else if (Direction == "L") {
+        ChickenX += -1
+    } else if (Direction == "R") {
+        ChickenX += 1
+    }
+    tiles.placeOnTile(SpriteToMove, tiles.getTileLocation(ChickenX, ChickenY))
+}
 scene.onOverlapTile(SpriteKind.Projectile, myTiles.tile2, function (sprite, location) {
     sprite.destroy()
 })
