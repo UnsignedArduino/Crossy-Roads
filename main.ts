@@ -84,6 +84,63 @@ namespace myTiles {
 9 9 9 9 9 7 7 7 7 7 7 7 9 9 9 9 
 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 
 `
+    //% blockIdentity=images._tile
+    export const tile4 = img`
+7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 
+7 7 7 7 7 7 7 7 7 7 e e 7 7 7 e 
+e 7 e e e 7 7 7 e e e e e e e e 
+e e d d e e d d e e d d e e d d 
+e e d d e e d d e e d d e e d d 
+f f f f f f f f f f f f f f f f 
+e e d d e e d d e e d d e e d d 
+e e d d e e d d e e d d e e d d 
+e e d d e e d d e e d d e e d d 
+e e d d e e d d e e d d e e d d 
+f f f f f f f f f f f f f f f f 
+e e d d e e d d e e d d e e d d 
+e e d d e e d d e e d d e e d d 
+e 7 7 e e e 7 7 e e 7 7 7 7 7 e 
+7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 
+7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 
+`
+    //% blockIdentity=images._tile
+    export const tile6 = img`
+7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 
+7 7 7 7 7 7 7 7 7 7 e e 7 7 7 e 
+e 7 e e e 7 7 7 e e e e e e e e 
+e e d d e e d d e e d d e e d d 
+e e d d e e d d e e d d e e d d 
+f f f f f f f f f f f f f f f f 
+e e d d e e d d e e d d e e d d 
+e e d d e e d d e e d d e e d d 
+e e d d e e d d e e d d e e d d 
+e e d d e e d d e e d d e e d d 
+f f f f f f f f f f f f f f f f 
+e e d d e f c c f e d d e e d d 
+e e d d e f c c f e d d e e d d 
+e 7 7 e 7 f f f f e 7 7 7 7 7 e 
+7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 
+7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 
+`
+    //% blockIdentity=images._tile
+    export const tile8 = img`
+7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 
+7 7 7 7 7 7 7 7 7 7 e e 7 7 7 e 
+e 7 e e e 7 7 7 e e e e e e e e 
+e e d d e e d d e e d d e e d d 
+e e d d e e d d e e d d e e d d 
+f f f f f f f f f f f f f f f f 
+e e d d e e d d e e d d e e d d 
+e e d d e e d d e e d d e e d d 
+e e d d e e d d e e d d e e d d 
+e e d d e e d d e e d d e e d d 
+f f f f f f f f f f f f f f f f 
+e e d d e f 2 2 f e d d e e d d 
+e e d d e f 2 2 f e d d e e d d 
+e 7 7 e 7 f f f f e 7 7 7 7 7 e 
+7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 
+7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 
+`
 }
 scene.onOverlapTile(SpriteKind.Food, sprites.vehicle.roadHorizontal, function (sprite, location) {
     sprite.destroy()
@@ -236,7 +293,7 @@ Chicken.setFlag(SpriteFlag.StayInScreen, true)
 Chicken.setFlag(SpriteFlag.ShowPhysics, false)
 scene.setBackgroundColor(7)
 tiles.setTilemap(tiles.createTilemap(
-            hex`0a0010000909090909090909090903010103010501070503020202020202020202020f0f020f020f0202020f020f0f02020f0f020f0f0909090909090909090903010301010101010603030101010701010103030909090909090909090909090909090909090909030301010103010103030303070105010101030303030105010101030303030301010101010103030303010701010101030303030303030303030303`,
+            hex`0a0010000909090909090909090903010103010501070503020202020202020202020f0f020f020f0202020f020f0f02020f0f020f0f0909090909090909090910101110101010101010030101010701030103030909090909090909090909090909090909090909030301010103010103030303070105010101030303030105010101030303030301010101010103030303010701010101030303030303030303030303`,
             img`
 . . . . . . . . . . 
 . . . . . . . . . . 
@@ -255,7 +312,7 @@ tiles.setTilemap(tiles.createTilemap(
 . . . . . . . . . . 
 . . . . . . . . . . 
 `,
-            [myTiles.tile0,myTiles.tile1,myTiles.tile2,sprites.builtin.forestTiles0,sprites.builtin.forestTiles24,sprites.castle.tileGrass1,sprites.castle.tileGrass3,sprites.castle.tileGrass2,sprites.vehicle.roadVertical,sprites.vehicle.roadHorizontal,sprites.castle.tilePath1,sprites.castle.tilePath6,sprites.castle.tilePath5,sprites.castle.tilePath2,sprites.builtin.crowd8,myTiles.tile3],
+            [myTiles.tile0,myTiles.tile1,myTiles.tile2,sprites.builtin.forestTiles0,sprites.builtin.forestTiles24,sprites.castle.tileGrass1,sprites.castle.tileGrass3,sprites.castle.tileGrass2,sprites.vehicle.roadVertical,sprites.vehicle.roadHorizontal,sprites.castle.tilePath1,sprites.castle.tilePath6,sprites.castle.tilePath5,sprites.castle.tilePath2,sprites.builtin.crowd8,myTiles.tile3,myTiles.tile4,myTiles.tile6,myTiles.tile8],
             TileScale.Sixteen
         ))
 scene.cameraFollowSprite(Chicken)
