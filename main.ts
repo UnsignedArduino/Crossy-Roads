@@ -85,7 +85,16 @@ namespace myTiles {
 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 
 `
 }
+scene.onOverlapTile(SpriteKind.Food, sprites.vehicle.roadHorizontal, function (sprite, location) {
+    sprite.destroy()
+})
+scene.onOverlapTile(SpriteKind.Food, myTiles.tile1, function (sprite, location) {
+    sprite.destroy()
+})
 scene.onOverlapTile(SpriteKind.Projectile, sprites.castle.tileGrass1, function (sprite, location) {
+    sprite.destroy()
+})
+scene.onOverlapTile(SpriteKind.Food, sprites.castle.tileGrass3, function (sprite, location) {
     sprite.destroy()
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -113,6 +122,10 @@ scene.onOverlapTile(SpriteKind.Projectile, myTiles.tile3, function (sprite, loca
 scene.onOverlapTile(SpriteKind.Projectile, sprites.castle.tileGrass3, function (sprite, location) {
     sprite.destroy()
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
+    OnLog = 1
+    sprite.setVelocity(25, 0)
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
     sprite.destroy(effects.spray, 100)
     scene.cameraShake(4, 500)
@@ -125,8 +138,11 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Projectile, function (sprite
 })
 function check_for_tiles (DirectionIfError: string, SpriteToCheck: Sprite) {
     if (SpriteToCheck.tileKindAt(TileDirection.Center, myTiles.tile2)) {
-        SpriteToCheck.destroy(effects.fountain, 100)
-        Dead = 1
+        pause(50)
+        if (OnLog == 0) {
+            SpriteToCheck.destroy(effects.fountain, 100)
+            Dead = 1
+        }
     } else if (SpriteToCheck.tileKindAt(TileDirection.Center, sprites.builtin.forestTiles0)) {
         move(DirectionIfError, SpriteToCheck)
     }
@@ -137,7 +153,14 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.setAction(Chicken, ActionKind.Right)
     Timeout = 50
 })
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Food, function (sprite, otherSprite) {
+    sprite.destroy()
+    otherSprite.destroy()
+})
 scene.onOverlapTile(SpriteKind.Projectile, myTiles.tile1, function (sprite, location) {
+    sprite.destroy()
+})
+scene.onOverlapTile(SpriteKind.Food, sprites.castle.tileGrass2, function (sprite, location) {
     sprite.destroy()
 })
 scene.onOverlapTile(SpriteKind.Projectile, sprites.builtin.forestTiles0, function (sprite, location) {
@@ -150,28 +173,44 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     info.changeScoreBy(1)
     Timeout = 50
 })
+scene.onOverlapTile(SpriteKind.Food, myTiles.tile3, function (sprite, location) {
+    sprite.destroy()
+})
 function move (Direction: string, SpriteToMove: Sprite) {
     if (Direction == "U") {
+        SpriteToMove.setVelocity(0, 0)
+        OnLog = 0
         ChickenY += -1
     } else if (Direction == "D") {
+        SpriteToMove.setVelocity(0, 0)
+        OnLog = 0
         ChickenY += 1
     } else if (Direction == "L") {
+        SpriteToMove.setVelocity(0, 0)
+        OnLog = 0
         ChickenX += -1
     } else if (Direction == "R") {
+        SpriteToMove.setVelocity(0, 0)
+        OnLog = 0
         ChickenX += 1
     }
     tiles.placeOnTile(SpriteToMove, tiles.getTileLocation(ChickenX, ChickenY))
 }
-scene.onOverlapTile(SpriteKind.Projectile, myTiles.tile2, function (sprite, location) {
+scene.onOverlapTile(SpriteKind.Food, sprites.builtin.forestTiles0, function (sprite, location) {
+    sprite.destroy()
+})
+scene.onOverlapTile(SpriteKind.Food, sprites.castle.tileGrass1, function (sprite, location) {
     sprite.destroy()
 })
 scene.onOverlapTile(SpriteKind.Projectile, sprites.castle.tileGrass2, function (sprite, location) {
     sprite.destroy()
 })
 let Eagle: Sprite = null
+let Log: Sprite = null
 let Car: Sprite = null
 let ChickenY = 0
 let ChickenX = 0
+let OnLog = 0
 let Timeout = 0
 let Dead = 0
 let Chicken: Sprite = null
@@ -197,7 +236,7 @@ Chicken.setFlag(SpriteFlag.StayInScreen, true)
 Chicken.setFlag(SpriteFlag.ShowPhysics, false)
 scene.setBackgroundColor(7)
 tiles.setTilemap(tiles.createTilemap(
-            hex`0a0010000909090909090909090903010103010501070503020f020f020f02020f020f0f0202020f0f02020f020f0f0202020f020f0f0909090909090909090903010301010101010603030101010701010103030909090909090909090909090909090909090909030301010103010103030303070105010101030303030105010101030303030301010101010103030303010701010101030303030303030303030303`,
+            hex`0a0010000909090909090909090903010103010501070503020202020202020202020f0f020f020f0202020f020f0f02020f0f020f0f0909090909090909090903010301010101010603030101010701010103030909090909090909090909090909090909090909030301010103010103030303070105010101030303030105010101030303030301010101010103030303010701010101030303030303030303030303`,
             img`
 . . . . . . . . . . 
 . . . . . . . . . . 
@@ -224,8 +263,11 @@ info.setScore(0)
 Dead = 0
 let DeadTimeout = 20
 Timeout = 50
+OnLog = 0
 let CarSpawnListLeft = [9, 5]
 let CarSpawnListRight = [8, 0]
+let LogSpawnListLeft = [2]
+let LogSpawnListRight: number[] = []
 ChickenX = 4
 ChickenY = 13
 let ChickenFowardAnim = animation.createAnimation(ActionKind.Foward, 100)
@@ -436,6 +478,32 @@ game.onUpdateInterval(100, function () {
             tiles.placeOnTile(Car, tiles.getTileLocation(10, CarSpawnListRight[Math.randomRange(0, CarSpawnListLeft.length)]))
         }
     }
+    if (Math.percentChance(50)) {
+        if (Math.percentChance(50)) {
+            Log = sprites.createProjectileFromSide(img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+e e e e e e e e e e e e e e e e 
+c c c c c c c c c c c e e e e e 
+e e e e e e e e e e e e c c c c 
+e c c c c c c c c c c c c e e e 
+e e e e e e e e e e e e e e e e 
+e c c c c c e e e e c c c c e e 
+e e e e e e e e e e e e e c c c 
+e e c c c c c c c e e e e e e c 
+e e e e e e c c c e e c c e e e 
+c c c c c c c c c c c e c c c e 
+e e e e e c c c c e e e e e c e 
+e e e e e e e e e e e e e e e e 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`, 25, 0)
+            tiles.placeOnTile(Log, tiles.getTileLocation(0, LogSpawnListLeft[Math.randomRange(0, LogSpawnListLeft.length)]))
+            Log.setKind(SpriteKind.Food)
+        } else {
+        	
+        }
+    }
     if (Dead != 0) {
         if (DeadTimeout > 0) {
             DeadTimeout += -1
@@ -471,5 +539,8 @@ e e e e e e e e e e e e e e e e e .
     } else {
         Timeout += -1
     }
-    console.log("" + Timeout + ", " + DeadTimeout)
+    if (OnLog == 1) {
+        ChickenX += 25 / 16 / 10
+    }
+    console.log("" + Timeout + ", " + DeadTimeout + ", " + OnLog)
 })
