@@ -478,7 +478,7 @@ game.onUpdateInterval(100, function () {
             tiles.placeOnTile(Car, tiles.getTileLocation(10, CarSpawnListRight[Math.randomRange(0, CarSpawnListLeft.length)]))
         }
     }
-    if (Math.percentChance(50)) {
+    if (Math.percentChance(40)) {
         if (Math.percentChance(50)) {
             Log = sprites.createProjectileFromSide(img`
 . . . . . . . . . . . . . . . . 
