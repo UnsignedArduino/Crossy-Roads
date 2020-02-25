@@ -7,6 +7,9 @@ enum ActionKind {
     Left,
     Right
 }
+namespace SpriteKind {
+    export const Enemy2 = SpriteKind.create()
+}
 namespace myTiles {
     //% blockIdentity=images._tile
     export const tile0 = img`
@@ -148,6 +151,9 @@ scene.onOverlapTile(SpriteKind.Food, sprites.vehicle.roadHorizontal, function (s
 scene.onOverlapTile(SpriteKind.Food, myTiles.tile1, function (sprite, location) {
     sprite.destroy()
 })
+scene.onOverlapTile(SpriteKind.Enemy2, myTiles.tile3, function (sprite, location) {
+    sprite.destroy()
+})
 scene.onOverlapTile(SpriteKind.Projectile, sprites.castle.tileGrass1, function (sprite, location) {
     sprite.destroy()
 })
@@ -167,11 +173,20 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     info.changeScoreBy(-1)
     Timeout = 50
 })
+scene.onOverlapTile(SpriteKind.Enemy2, sprites.castle.tileGrass3, function (sprite, location) {
+    sprite.destroy()
+})
+scene.onOverlapTile(SpriteKind.Enemy2, sprites.castle.tileGrass2, function (sprite, location) {
+    sprite.destroy()
+})
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSprite) {
     otherSprite.follow(sprite, 2000)
     sprite.setFlag(SpriteFlag.DestroyOnWall, true)
     otherSprite.setFlag(SpriteFlag.DestroyOnWall, true)
     otherSprite.setFlag(SpriteFlag.Invisible, true)
+})
+scene.onOverlapTile(SpriteKind.Enemy2, sprites.builtin.forestTiles0, function (sprite, location) {
+    sprite.destroy()
 })
 scene.onOverlapTile(SpriteKind.Projectile, myTiles.tile3, function (sprite, location) {
     sprite.destroy()
@@ -182,6 +197,12 @@ scene.onOverlapTile(SpriteKind.Projectile, sprites.castle.tileGrass3, function (
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     OnLog = 1
     sprite.setVelocity(25, 0)
+})
+scene.onOverlapTile(SpriteKind.Enemy2, sprites.castle.tileGrass1, function (sprite, location) {
+    sprite.destroy()
+})
+scene.onOverlapTile(SpriteKind.Enemy2, myTiles.tile2, function (sprite, location) {
+    sprite.destroy()
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
     sprite.destroy(effects.spray, 100)
@@ -223,6 +244,14 @@ scene.onOverlapTile(SpriteKind.Food, sprites.castle.tileGrass2, function (sprite
 scene.onOverlapTile(SpriteKind.Projectile, sprites.builtin.forestTiles0, function (sprite, location) {
     sprite.destroy()
 })
+scene.onOverlapTile(SpriteKind.Enemy2, sprites.vehicle.roadHorizontal, function (sprite, location) {
+    sprite.destroy()
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy2, function (sprite, otherSprite) {
+    sprite.destroy(effects.spray, 100)
+    scene.cameraShake(4, 500)
+    Dead = 1
+})
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     move("U", Chicken)
     check_for_tiles("D", Chicken)
@@ -231,6 +260,9 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     Timeout = 50
 })
 scene.onOverlapTile(SpriteKind.Food, myTiles.tile3, function (sprite, location) {
+    sprite.destroy()
+})
+scene.onOverlapTile(SpriteKind.Enemy2, myTiles.tile1, function (sprite, location) {
     sprite.destroy()
 })
 function move (Direction: string, SpriteToMove: Sprite) {
@@ -259,9 +291,14 @@ scene.onOverlapTile(SpriteKind.Food, sprites.builtin.forestTiles0, function (spr
 scene.onOverlapTile(SpriteKind.Food, sprites.castle.tileGrass1, function (sprite, location) {
     sprite.destroy()
 })
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy2, function (sprite, otherSprite) {
+    sprite.destroy()
+    otherSprite.destroy()
+})
 scene.onOverlapTile(SpriteKind.Projectile, sprites.castle.tileGrass2, function (sprite, location) {
     sprite.destroy()
 })
+let Train: Sprite = null
 let Eagle: Sprite = null
 let Log: Sprite = null
 let Car: Sprite = null
@@ -325,6 +362,10 @@ let CarSpawnListLeft = [9, 5]
 let CarSpawnListRight = [8, 0]
 let LogSpawnListLeft = [2]
 let LogSpawnListRight: number[] = []
+let TrainSpawnListLeft = [6]
+let CurrentTrainSpot = 0
+let SummonTrain = 0
+let TrainTimeout = -1
 ChickenX = 4
 ChickenY = 13
 let ChickenFowardAnim = animation.createAnimation(ActionKind.Foward, 100)
@@ -561,6 +602,22 @@ e e e e e e e e e e e e e e e e
         	
         }
     }
+    if (Math.percentChance(10)) {
+        CurrentTrainSpot = TrainSpawnListLeft[Math.randomRange(0, TrainSpawnListLeft.length)]
+        tiles.setTileAt(tiles.getTileLocation(2, CurrentTrainSpot), myTiles.tile8)
+        TrainTimeout = 20
+    }
+    if (TrainTimeout != 0) {
+        TrainTimeout += -1
+    }
+    if (TrainTimeout == 0) {
+        tiles.setTileAt(tiles.getTileLocation(2, CurrentTrainSpot), myTiles.tile6)
+        SummonTrain = 20
+        TrainTimeout = -1
+    }
+    if (SummonTrain > 0) {
+        TrainTimeout += -1
+    }
     if (Dead != 0) {
         if (DeadTimeout > 0) {
             DeadTimeout += -1
@@ -600,4 +657,28 @@ e e e e e e e e e e e e e e e e e .
         ChickenX += 25 / 16 / 10
     }
     console.log("" + Timeout + ", " + DeadTimeout + ", " + OnLog)
+})
+game.onUpdate(function () {
+    if (SummonTrain > 0) {
+        Train = sprites.createProjectileFromSide(img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. b b b b b b b b b b b b b b . 
+. b b b b b b b b b b b b b b . 
+. c c c c c c c c c c c c c c . 
+. b c b b b b b b b b b b c b . 
+. b c b b b b b b b b b b c b . 
+f b c b b b b b b b b b b c b f 
+f b c b b b b b b b b b b c b f 
+. b c b b b b b b b b b b c b . 
+. b c b b b b b b b b b b c b . 
+. c c c c c c c c c c c c c c . 
+. b b b b b b b b b b b b b b . 
+. b b b b b b b b b b b b b b . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`, 250, 0)
+        tiles.placeOnTile(Train, tiles.getTileLocation(0, CurrentTrainSpot))
+        Train.setKind(SpriteKind.Enemy2)
+    }
 })
