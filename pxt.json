@@ -1,5 +1,5 @@
 {
-    "name": "Crossy Roads v1",
+    "name": "Crossy Roads",
     "dependencies": {
         "device": "*",
         "animation": "*"
